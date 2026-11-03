@@ -50,7 +50,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: url('https://images.pexels.com/photos/29744484/pexels-photo-29744484.jpeg?auto=compress&cs=tinysrgb&w=1920') center/cover no-repeat;
+  background: url('https://images.pexels.com/photos/325185/pexels-photo-325185.jpeg?auto=compress&cs=tinysrgb&w=1920') center/cover no-repeat;
   padding: 24px;
   position: relative;
 }
@@ -62,20 +62,21 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.6);
   z-index: 0;
 }
 
 .login-card {
-  background: var(--card);
-  border-radius: 16px;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.12), 0 8px 16px rgba(0,0,0,0.08);
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  box-shadow: 0 25px 50px rgba(0,0,0,0.25);
   width: 100%;
   max-width: 420px;
   padding: 48px 40px;
   position: relative;
   z-index: 1;
-  border: 1px solid var(--border);
+  border: 1px solid rgba(255,255,255,0.2);
 }
 
 .login-brand {
@@ -154,10 +155,45 @@ body {
   box-shadow: none;
 }
 
+.btn-primary {
+  background: #111827;
+  color: #fff;
+  border: none;
+  padding: 14px 48px;
+  border-radius: 50px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.15);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left 0.5s;
+}
+
+.btn-primary:hover:not(:disabled)::before {
+  left: 100%;
+}
+
 .btn-primary:hover:not(:disabled) {
   background: #000000;
-  transform: none;
-  box-shadow: none;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+}
+
+.btn-primary:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
 }
 
 .btn-primary:disabled {
@@ -507,4 +543,12 @@ body {
   66% {transform: translate(calc(var(--s,1)*50%)) rotate(calc(var(--s,1)*180deg))}
   90%,
   100% {transform: translate(0) rotate(calc(var(--s,1)*180deg))}
+}
+
+.login-form .btn-primary {
+  display: block;
+  margin: 8px auto 0;
+  padding: 14px 64px;
+  font-size: 16px;
+  border-radius: 50px;
 }
