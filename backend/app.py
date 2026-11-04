@@ -205,3 +205,18 @@ def complaints_data(
 @app.get("/api/health")
 def health() -> dict[str, str]:
     return {"status": "ok", "time": str(int(time.time()))}
+
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
+import pathlib
+
+_FRONTEND_DIST = pathlib.Path(__file__).resolve().parent.parent / "frontend" / "dist"
+if _FRONTEND_DIST.exists():
+    app.mount("/assets", StaticFiles(directory=str(_FRONTEND_DIST / "assets")), name="assets")
+    @app.get("/{full_path:path}")
+    def spa_fallback(full_path: str):
+        # Serve index.html for any non-API, non-asset route (SPA client-side routing)
+        candidate = _FRONTEND_DIST / full_path
+        if candidate.is_file():
+            return FileResponse(str(candidate))
+        return FileResponse(str(_FRONTEND_DIST / "index.html"))
